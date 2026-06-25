@@ -12,8 +12,10 @@ app.use(cors());
 app.use(express.json());
 
 import authRoutes from './routes/auth.routes';
+import loanRoutes from './routes/loan.routes';
 
 app.use('/api/auth', authRoutes);
+app.use('/api/loans', loanRoutes);
 
 app.get('/', (req, res) => {
   res.send('CreditSea LMS API is running');
