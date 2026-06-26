@@ -38,8 +38,14 @@ export const uploadFileToR2 = async (fileBuffer: Buffer, originalName: string, m
 
   await s3Client.send(command);
 
-  // Return the raw R2 URL using the endpoint domain. 
-  // For production, users typically set up a custom pub.dev domain in Cloudflare Dashboard.
+  if (process.env.R2_PUBLIC_URL) {
+    const baseUrl = process.env.R2_PUBLIC_URL.endsWith('/') 
+      ? process.env.R2_PUBLIC_URL.slice(0, -1) 
+      : process.env.R2_PUBLIC_URL;
+    return `${baseUrl}/${fileName}`;
+  }
+
+  // Fallback to raw endpoint (private, usually returns 400 without auth)
   const baseUrl = R2_ENDPOINT.replace('https://', '');
   return `https://${R2_BUCKET_NAME}.${baseUrl}/${fileName}`;
 };

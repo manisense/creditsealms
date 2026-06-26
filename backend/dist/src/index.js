@@ -25,12 +25,12 @@ app.use('/api/admin', admin_routes_1.default);
 app.get('/', (req, res) => {
     res.send('CreditSea LMS API is running');
 });
+app.listen(Number(port), '0.0.0.0', () => {
+    console.log(`Server is running on port ${port}`);
+});
 mongoose_1.default.connect(process.env.MONGODB_URI)
     .then(() => {
     console.log('Connected to MongoDB');
-    app.listen(port, () => {
-        console.log(`Server is running on port ${port}`);
-    });
 })
     .catch((error) => {
     console.error('Error connecting to MongoDB:', error);
