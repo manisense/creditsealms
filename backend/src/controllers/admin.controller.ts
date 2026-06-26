@@ -116,6 +116,11 @@ export const recordPayment = async (req: AuthRequest, res: Response): Promise<vo
 
     const paymentAmount = parseFloat(amount);
     
+    if (paymentAmount > loan.outstandingBalance) {
+      res.status(400).json({ error: 'Payment amount exceeds outstanding balance' });
+      return;
+    }
+    
     // Record the payment
     const payment = new Payment({
       loanId,
@@ -141,8 +146,12 @@ export const recordPayment = async (req: AuthRequest, res: Response): Promise<vo
       payment, 
       loan 
     });
-  } catch (error) {
+  } catch (error: any) {
     console.error('Record payment error:', error);
+    if (error.code === 11000) {
+      res.status(400).json({ error: 'UTR number already exists' });
+      return;
+    }
     res.status(500).json({ error: 'Internal server error' });
   }
 };

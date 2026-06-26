@@ -68,12 +68,12 @@ export default function BorrowerDashboard() {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'PENDING': return 'bg-yellow-500/10 text-yellow-500 border-yellow-500/20';
-      case 'APPROVED': return 'bg-green-500/10 text-green-500 border-green-500/20';
-      case 'DISBURSED': return 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20';
-      case 'REJECTED': return 'bg-red-500/10 text-red-500 border-red-500/20';
-      case 'CLOSED': return 'bg-slate-500/10 text-slate-400 border-slate-500/20';
-      default: return 'bg-gray-500/10 text-gray-500 border-gray-500/20';
+      case 'PENDING': return 'bg-yellow-50 text-yellow-700 border-yellow-200';
+      case 'APPROVED': return 'bg-emerald-50 text-emerald-700 border-emerald-200';
+      case 'DISBURSED': return 'bg-blue-50 text-blue-700 border-blue-200';
+      case 'REJECTED': return 'bg-rose-50 text-rose-700 border-rose-200';
+      case 'CLOSED': return 'bg-slate-100 text-slate-700 border-slate-200';
+      default: return 'bg-gray-50 text-gray-600 border-gray-200';
     }
   };
 
